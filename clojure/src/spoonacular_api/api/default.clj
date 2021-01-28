@@ -27,7 +27,7 @@
 (defn-spec add-to-meal-plan-with-http-info any?
   "Add to Meal Plan
   Add an item to the user's meal plan."
-  [username string?, hash string?, inline-object-11 inline-object-11]
+  [username string?, hash string?, inline-object-11 inline-object-11-spec]
   (check-required-params username hash inline-object-11)
   (call-api "/mealplanner/{username}/items" :post
             {:path-params   {"username" username }
@@ -42,7 +42,7 @@
 (defn-spec add-to-meal-plan any?
   "Add to Meal Plan
   Add an item to the user's meal plan."
-  [username string?, hash string?, inline-object-11 inline-object-11]
+  [username string?, hash string?, inline-object-11 inline-object-11-spec]
   (let [res (:data (add-to-meal-plan-with-http-info username hash inline-object-11))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
@@ -52,7 +52,7 @@
 (defn-spec add-to-shopping-list-with-http-info any?
   "Add to Shopping List
   Add an item to the current shopping list of a user."
-  [username string?, hash string?, inline-object-14 inline-object-14]
+  [username string?, hash string?, inline-object-14 inline-object-14-spec]
   (check-required-params username hash inline-object-14)
   (call-api "/mealplanner/{username}/shopping-list/items" :post
             {:path-params   {"username" username }
@@ -67,7 +67,7 @@
 (defn-spec add-to-shopping-list any?
   "Add to Shopping List
   Add an item to the current shopping list of a user."
-  [username string?, hash string?, inline-object-14 inline-object-14]
+  [username string?, hash string?, inline-object-14 inline-object-14-spec]
   (let [res (:data (add-to-shopping-list-with-http-info username hash inline-object-14))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
@@ -253,8 +253,8 @@
 (defn-spec classify-grocery-product-with-http-info any?
   "Classify Grocery Product
   This endpoint allows you to match a packaged food to a basic category, e.g. a specific brand of milk to the category milk."
-  ([inline-object-9 inline-object-9, ] (classify-grocery-product-with-http-info inline-object-9 nil))
-  ([inline-object-9 inline-object-9, {:keys [locale]} (s/map-of keyword? any?)]
+  ([inline-object-9 inline-object-9-spec, ] (classify-grocery-product-with-http-info inline-object-9 nil))
+  ([inline-object-9 inline-object-9-spec, {:keys [locale]} (s/map-of keyword? any?)]
    (check-required-params inline-object-9)
    (call-api "/food/products/classify" :post
              {:path-params   {}
@@ -269,8 +269,8 @@
 (defn-spec classify-grocery-product any?
   "Classify Grocery Product
   This endpoint allows you to match a packaged food to a basic category, e.g. a specific brand of milk to the category milk."
-  ([inline-object-9 inline-object-9, ] (classify-grocery-product inline-object-9 nil))
-  ([inline-object-9 inline-object-9, optional-params any?]
+  ([inline-object-9 inline-object-9-spec, ] (classify-grocery-product inline-object-9 nil))
+  ([inline-object-9 inline-object-9-spec, optional-params any?]
    (let [res (:data (classify-grocery-product-with-http-info inline-object-9 optional-params))]
      (if (:decode-models *api-context*)
         (st/decode any? res st/string-transformer)
@@ -307,7 +307,7 @@
 (defn-spec clear-meal-plan-day-with-http-info any?
   "Clear Meal Plan Day
   Delete all planned items from the user's meal plan for a specific day."
-  [username string?, date string?, hash string?, inline-object-10 inline-object-10]
+  [username string?, date string?, hash string?, inline-object-10 inline-object-10-spec]
   (check-required-params username date hash inline-object-10)
   (call-api "/mealplanner/{username}/day/{date}" :delete
             {:path-params   {"username" username "date" date }
@@ -322,8 +322,8 @@
 (defn-spec clear-meal-plan-day any?
   "Clear Meal Plan Day
   Delete all planned items from the user's meal plan for a specific day."
-  [username string?, date string?, hash string?, inline-object-10 inline-object-10]
-  (let [res (:data (clear-meal-plan-day-with-http-info username date hash inline-object-10))]
+  [username string?, date string?, hash string?, inline-object-10 inline-object-10-spec]
+  (let [res (:data (clear-meal-plan-day-with-http-info username date hash inline-object-10-spec))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
        res)))
@@ -432,7 +432,7 @@
 (defn-spec delete-from-meal-plan-with-http-info any?
   "Delete from Meal Plan
   Delete an item from the user's meal plan."
-  [username string?, id float?, hash string?, inline-object-12 inline-object-12]
+  [username string?, id float?, hash string?, inline-object-12 inline-object-12-spec]
   (check-required-params username id hash inline-object-12)
   (call-api "/mealplanner/{username}/items/{id}" :delete
             {:path-params   {"username" username "id" id }
@@ -447,7 +447,7 @@
 (defn-spec delete-from-meal-plan any?
   "Delete from Meal Plan
   Delete an item from the user's meal plan."
-  [username string?, id float?, hash string?, inline-object-12 inline-object-12]
+  [username string?, id float?, hash string?, inline-object-12 inline-object-12-spec]
   (let [res (:data (delete-from-meal-plan-with-http-info username id hash inline-object-12))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
@@ -457,7 +457,7 @@
 (defn-spec delete-from-shopping-list-with-http-info any?
   "Delete from Shopping List
   Delete an item from the current shopping list of the user."
-  [username string?, id float?, hash string?, inline-object-15 inline-object-15]
+  [username string?, id float?, hash string?, inline-object-15 inline-object-15-spec]
   (check-required-params username id hash inline-object-15)
   (call-api "/mealplanner/{username}/shopping-list/items/{id}" :delete
             {:path-params   {"username" username "id" id }
@@ -472,7 +472,7 @@
 (defn-spec delete-from-shopping-list any?
   "Delete from Shopping List
   Delete an item from the current shopping list of the user."
-  [username string?, id float?, hash string?, inline-object-15 inline-object-15]
+  [username string?, id float?, hash string?, inline-object-15 inline-object-15-spec]
   (let [res (:data (delete-from-shopping-list-with-http-info username id hash inline-object-15))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
@@ -557,7 +557,7 @@
 (defn-spec generate-shopping-list-with-http-info any?
   "Generate Shopping List
   Generate the shopping list for a user from the meal planner in a given time frame."
-  [username string?, start-date string?, end-date string?, hash string?, inline-object-13 inline-object-13]
+  [username string?, start-date string?, end-date string?, hash string?, inline-object-13 inline-object-13-spec]
   (check-required-params username start-date end-date hash inline-object-13)
   (call-api "/mealplanner/{username}/shopping-list/{start-date}/{end-date}" :post
             {:path-params   {"username" username "start-date" start-date "end-date" end-date }
@@ -572,7 +572,7 @@
 (defn-spec generate-shopping-list any?
   "Generate Shopping List
   Generate the shopping list for a user from the meal planner in a given time frame."
-  [username string?, start-date string?, end-date string?, hash string?, inline-object-13 inline-object-13]
+  [username string?, start-date string?, end-date string?, hash string?, inline-object-13 inline-object-13-spec]
   (let [res (:data (generate-shopping-list-with-http-info username start-date end-date hash inline-object-13))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
@@ -2026,5 +2026,3 @@
     (if (:decode-models *api-context*)
        (st/decode string? res st/string-transformer)
        res)))
-
-
